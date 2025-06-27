@@ -1,357 +1,465 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkle & Style - Girls' Fashion & Lifestyle</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for animations and fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-// Product data for various categories
-const products = {
-    dresses: [
-        {
-            id: 'dress1',
-            name: 'Elegant Floral Dress',
-            price: '₹1,299',
-            imageUrl: 'https://placehold.co/400x500/A78BFA/ffffff?text=Floral+Dress',
-            description: 'A beautiful floral dress perfect for summer outings and special occasions. Made with breathable fabric.',
-        },
-        {
-            id: 'dress2',
-            name: 'Princess Ball Gown',
-            price: '₹2,499',
-            imageUrl: 'https://placehold.co/400x500/FB7185/ffffff?text=Ball+Gown',
-            description: 'Stunning ball gown designed for little princesses to shine at parties. Features multi-layered tulle.',
-        },
-        {
-            id: 'dress3',
-            name: 'Casual Denim Dress',
-            price: '₹999',
-            imageUrl: 'https://placehold.co/400x500/60A5FA/ffffff?text=Denim+Dress',
-            description: 'Comfortable and stylish denim dress for everyday wear. Easy to style for any casual look.',
-        },
-        {
-            id: 'dress4',
-            name: 'Sparkle Party Dress',
-            price: '₹1,899',
-            imageUrl: 'https://placehold.co/400x500/FACC15/ffffff?text=Party+Dress',
-            description: 'Shimmering party dress with sequin details, perfect for celebrations. Lightweight and comfortable.',
-        },
-        {
-            id: 'dress5',
-            name: 'Summer Maxi Dress',
-            price: '₹1,599',
-            imageUrl: 'https://placehold.co/400x500/81C784/ffffff?text=Maxi+Dress',
-            description: 'Flowy maxi dress, ideal for beach days or relaxed evenings. Soft and elegant design.',
-        },
-    ],
-    necklaces: [
-        {
-            id: 'necklace1',
-            name: 'Cute Heart Pendant',
-            price: '₹499',
-            imageUrl: 'https://placehold.co/400x400/FBBF24/ffffff?text=Heart+Necklace',
-            description: 'A delicate necklace with a cute heart pendant, ideal for daily wear. Hypoallergenic material.',
-        },
-        {
-            id: 'necklace2',
-            name: 'Unicorn Charm Necklace',
-            price: '₹599',
-            imageUrl: 'https://placehold.co/400x400/8B5CF6/ffffff?text=Unicorn+Necklace',
-            description: 'Magical unicorn charm necklace, a favorite for fantasy lovers. Sterling silver chain.',
-        },
-        {
-            id: 'necklace3',
-            name: 'Pearl String Necklace',
-            price: '₹799',
-            imageUrl: 'https://placehold.co/400x400/EC4899/ffffff?text=Pearl+Necklace',
-            description: 'Elegant string of pearls, adding a touch of sophistication to any outfit. Classic and timeless.',
-        },
-        {
-            id: 'necklace4',
-            name: 'Star Dangle Necklace',
-            price: '₹399',
-            imageUrl: 'https://placehold.co/400x400/34D399/ffffff?text=Star+Necklace',
-            description: 'Playful necklace with dangling star charms, perfect for a casual look. Lightweight and shimmering.',
-        },
-        {
-            id: 'necklace5',
-            name: 'Butterfly Choker',
-            price: '₹650',
-            imageUrl: 'https://placehold.co/400x400/81D4FA/ffffff?text=Butterfly+Choker',
-            description: 'Trendy butterfly choker, perfect for adding a stylish touch. Adjustable length.',
-        },
-    ],
-    footwear: [
-        {
-            id: 'shoes1',
-            name: 'Pink Glitter Sneakers',
-            price: '₹1,500',
-            imageUrl: 'https://placehold.co/400x400/FFC0CB/ffffff?text=Glitter+Sneakers',
-            description: 'Comfortable and stylish glitter sneakers for everyday sparkle. Non-slip sole.',
-        },
-        {
-            id: 'shoes2',
-            name: 'Ballet Flats with Bow',
-            price: '₹950',
-            imageUrl: 'https://placehold.co/400x400/FFDDC1/ffffff?text=Ballet+Flats',
-            description: 'Classic ballet flats with a cute bow detail, perfect for any occasion. Soft inner lining.',
-        },
-        {
-            id: 'shoes3',
-            name: 'Summer Sandals',
-            price: '₹700',
-            imageUrl: 'https://placehold.co/400x400/A0DA8B/ffffff?text=Summer+Sandals',
-            description: 'Lightweight and breathable sandals for warm weather. Easy to put on and take off.',
-        },
-    ],
-    accessories: [
-        {
-            id: 'acc1',
-            name: 'Sparkly Headband',
-            price: '₹250',
-            imageUrl: 'https://placehold.co/400x400/DDA0DD/ffffff?text=Headband',
-            description: 'A dazzling headband with embedded rhinestones. Perfect for special occasions.',
-        },
-        {
-            id: 'acc2',
-            name: 'Mini Backpack',
-            price: '₹1,200',
-            imageUrl: 'https://placehold.co/400x400/ADD8E6/ffffff?text=Mini+Backpack',
-            description: 'Stylish and compact mini backpack for essentials. Multiple compartments.',
-        },
-        {
-            id: 'acc3',
-            name: 'Rainbow Hair Clips (Set of 6)',
-            price: '₹300',
-            imageUrl: 'https://placehold.co/400x400/FF6347/ffffff?text=Hair+Clips',
-            description: 'Vibrant rainbow hair clips to add color to any hairstyle. Strong grip.',
-        },
-    ],
-    beauty: [
-        {
-            id: 'beauty1',
-            name: 'Kids Safe Nail Polish (Set)',
-            price: '₹800',
-            imageUrl: 'https://placehold.co/400x400/FFB6C1/ffffff?text=Nail+Polish',
-            description: 'Non-toxic, peel-off nail polish set for endless fun. Vibrant colors.',
-        },
-        {
-            id: 'beauty2',
-            name: 'Fruity Lip Balm (3-pack)',
-            price: '₹400',
-            imageUrl: 'https://placehold.co/400x400/F08080/ffffff?text=Lip+Balm',
-            description: 'Deliciously scented lip balms to keep lips soft and hydrated. Natural ingredients.',
-        },
-    ],
-    toys: [
-        {
-            id: 'toy1',
-            name: 'Dollhouse Playset',
-            price: '₹2,500',
-            imageUrl: 'https://placehold.co/400x400/98FB98/ffffff?text=Dollhouse',
-            description: 'Multi-story dollhouse with furniture and accessories for imaginative play. Durable construction.',
-        },
-        {
-            id: 'toy2',
-            name: 'Art & Craft Kit',
-            price: '₹1,000',
-            imageUrl: 'https://placehold.co/400x400/87CEFA/ffffff?text=Art+Kit',
-            description: 'Creative art and craft kit with various materials. Encourages creativity.',
-        },
-        {
-            id: 'toy3',
-            name: 'Plush Unicorn Toy',
-            price: '₹750',
-            imageUrl: 'https://placehold.co/400x400/D8BFD8/ffffff?text=Unicorn+Plush',
-            description: 'Soft and cuddly unicorn plush toy, perfect for snuggling. High-quality fabric.',
-        },
-    ],
-};
+        /* Hide scrollbar for category navigation */
+        .scrollbar-hide {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
 
-// Product Card Component
-const ProductCard = ({ product }) => (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-102 transition-all duration-300 overflow-hidden flex flex-col">
-        {/* Image Container with Aspect Ratio */}
-        <div className="relative overflow-hidden aspect-square rounded-t-xl">
-            <img
-                src={product.imageUrl}
-                alt={product.name}
-                // Use absolute positioning to fill the aspect-ratio container
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x400/CCCCCC/666666?text=Image+Not+Found`; }}
-            />
-        </div>
-        <div className="p-5 flex-grow flex flex-col">
-            <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">{product.name}</h3>
-            <p className="text-gray-600 text-sm mb-3 line-clamp-3 flex-grow">{product.description}</p>
-            <div className="flex justify-between items-center mt-auto">
-                <span className="text-2xl font-extrabold text-indigo-600">{product.price}</span>
-                <button className="bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:from-pink-600 hover:to-rose-600 transition duration-300">
-                    Add to Cart
+        /* Keyframe Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animation Utility Classes */
+        .animate-fade-in-down {
+            animation: fadeInDown 0.6s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        .animate-fade-in-scale {
+            animation: fadeInScale 0.5s ease-out forwards;
+        }
+
+        /* Staggered animation delays */
+        .animate-delay-100 { animation-delay: 0.1s; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-300 { animation-delay: 0.3s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        .animate-delay-500 { animation-delay: 0.5s; }
+        .animate-delay-600 { animation-delay: 0.6s; }
+        .animate-delay-700 { animation-delay: 0.7s; }
+        .animate-delay-800 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4 px-4 md:px-8 rounded-b-xl sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <h1 class="text-4xl font-extrabold text-purple-700 tracking-tight">
+                Sparkle & Style
+            </h1>
+            <!-- Search Bar (non-functional) -->
+            <div class="flex-1 max-w-lg mx-auto w-full md:w-auto">
+                <div class="relative">
+                    <input
+                        type="text"
+                        placeholder="Search for products..."
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
+                    />
+                    <svg
+                        class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </div>
+            </div>
+            <!-- User & Cart Icons (non-functional) -->
+            <div class="flex items-center space-x-6">
+                <button class="text-gray-700 hover:text-purple-600 transition duration-300 relative">
+                    <svg
+                        class="w-7 h-7"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span class="sr-only">Account</span>
+                </button>
+                <button class="text-gray-700 hover:text-purple-600 transition duration-300 relative">
+                    <svg
+                        class="w-7 h-7"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full px-2 py-0.5">
+                        0
+                    </span>
+                    <span class="sr-only">Cart</span>
                 </button>
             </div>
         </div>
-    </div>
-);
+        <!-- Category Navigation -->
+        <nav class="mt-4 overflow-x-auto pb-2 scrollbar-hide">
+            <ul id="category-nav" class="flex justify-center space-x-3 md:space-x-6 whitespace-nowrap">
+                <!-- Category buttons will be rendered here by JS -->
+            </ul>
+        </nav>
+    </header>
 
-// Main App Component
-const App = () => {
-    // State to manage the active category (default to dresses)
-    const [activeCategory, setActiveCategory] = useState('dresses');
-    // State for the search input (non-functional in this static example)
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const categories = [
-        { id: 'dresses', name: 'Dresses', title: 'Dazzling Dresses' },
-        { id: 'necklaces', name: 'Necklaces', title: 'Exquisite Necklaces' },
-        { id: 'footwear', name: 'Footwear', title: 'Stylish Footwear' },
-        { id: 'accessories', name: 'Accessories', title: 'Chic Accessories' },
-        { id: 'beauty', name: 'Beauty & Skincare', title: 'Sparkle & Glow' },
-        { id: 'toys', name: 'Toys & Games', title: 'Fun & Play' },
-    ];
-
-    // Get the title for the currently active category
-    const currentCategoryTitle = categories.find(cat => cat.id === activeCategory)?.title || 'Our Products';
-
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 font-sans antialiased">
-            {/* Header */}
-            <header className="bg-white shadow-md py-4 px-4 md:px-8 rounded-b-xl sticky top-0 z-20">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <h1 className="text-4xl font-extrabold text-purple-700 tracking-tight">
-                        Sparkle & Style
-                    </h1>
-                    {/* Search Bar */}
-                    <div className="flex-1 max-w-lg mx-auto w-full md:w-auto">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Search for products..."
-                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            <svg
-                                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                            </svg>
-                        </div>
-                    </div>
-                    {/* User & Cart Icons */}
-                    <div className="flex items-center space-x-6">
-                        <button className="text-gray-700 hover:text-purple-600 transition duration-300 relative">
-                            <svg
-                                className="w-7 h-7"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg>
-                            <span className="sr-only">Account</span>
-                        </button>
-                        <button className="text-gray-700 hover:text-purple-600 transition duration-300 relative">
-                            <svg
-                                className="w-7 h-7"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <circle cx="9" cy="21" r="1" />
-                                <circle cx="20" cy="21" r="1" />
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                            </svg>
-                            <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full px-2 py-0.5">
-                                0
-                            </span>
-                            <span className="sr-only">Cart</span>
-                        </button>
-                    </div>
-                </div>
-                {/* Category Navigation */}
-                <nav className="mt-4 overflow-x-auto pb-2 scrollbar-hide">
-                    <ul className="flex justify-center space-x-3 md:space-x-6 whitespace-nowrap">
-                        {categories.map((category) => (
-                            <li key={category.id}>
-                                <button
-                                    onClick={() => setActiveCategory(category.id)}
-                                    className={`text-base md:text-lg font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors duration-300
-                                        ${activeCategory === category.id
-                                            ? 'bg-purple-600 text-white shadow-lg'
-                                            : 'text-gray-700 hover:text-purple-600 hover:bg-purple-100'
-                                        }`}
-                                >
-                                    {category.name}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            </header>
-
-            {/* Hero Section / Banner */}
-            <section className="bg-purple-500 bg-opacity-10 py-16 text-center shadow-inner mt-px">
-                <div className="max-w-4xl mx-auto px-4">
-                    <h2 className="text-5xl md:text-6xl font-extrabold text-purple-800 leading-tight mb-4">
-                        Discover Your Perfect Style!
-                    </h2>
-                    <p className="text-xl text-gray-700 mb-8">
-                        From elegant dresses to sparkling accessories, find everything a girl needs.
-                    </p>
-                    <button className="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-rose-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
-                        Shop All Categories
-                    </button>
-                </div>
-            </section>
-
-            {/* Main Content Area */}
-            <main className="max-w-7xl mx-auto py-12 px-4 md:px-8">
-                {/* Category Title */}
-                <h2 className="text-4xl md:text-5xl font-extrabold text-center text-purple-800 mb-10 mt-6 animate-fade-in-down">
-                    {currentCategoryTitle}
-                </h2>
-
-                {/* Product Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    {products[activeCategory] &&
-                        products[activeCategory].map((product) => (
-                            <ProductCard key={product.id} product={product} />
-                        ))}
-                    {products[activeCategory]?.length === 0 && (
-                        <p className="col-span-full text-center text-gray-600 text-lg">
-                            No products found in this category.
-                        </p>
-                    )}
-                </div>
-            </main>
-
-            {/* Footer */}
-            <footer className="bg-white shadow-inner py-6 px-4 md:px-8 mt-12 rounded-t-xl">
-                <div className="max-w-7xl mx-auto text-center text-gray-600 text-sm">
-                    &copy; {new Date().getFullYear()} Sparkle & Style. All rights reserved.
-                </div>
-            </footer>
+    <!-- Hero Section / Banner -->
+    <section class="bg-purple-500 bg-opacity-10 py-16 text-center shadow-inner mt-px">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-purple-800 leading-tight mb-4 animate-fade-in-down">
+                Discover Your Perfect Style!
+            </h2>
+            <p class="text-xl text-gray-700 mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
+                From elegant dresses to sparkling accessories, find everything a girl needs.
+            </p>
+            <button class="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-rose-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 animate-fade-in-up" style="animation-delay: 0.4s;">
+                Shop All Categories
+            </button>
         </div>
-    );
-};
+    </section>
 
-export default App;
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-12 px-4 md:px-8">
+        <!-- Category Title -->
+        <h2 id="category-title" class="text-4xl md:text-5xl font-extrabold text-center text-purple-800 mb-10 mt-6 animate-fade-in-down">
+            <!-- Title will be updated by JS -->
+        </h2>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Product cards will be rendered here by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner py-6 px-4 md:px-8 mt-12 rounded-t-xl">
+        <div class="max-w-7xl mx-auto text-center text-gray-600 text-sm">
+            &copy; <span id="current-year"></span> Sparkle & Style. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Product data for various categories
+        const products = {
+            dresses: [
+                {
+                    id: 'dress1',
+                    name: 'Elegant Floral Dress',
+                    price: '₹1,299',
+                    imageUrl: 'https://placehold.co/400x500/A78BFA/ffffff?text=Floral+Dress',
+                    description: 'A beautiful floral dress perfect for summer outings and special occasions. Made with breathable fabric.',
+                },
+                {
+                    id: 'dress2',
+                    name: 'Princess Ball Gown',
+                    price: '₹2,499',
+                    imageUrl: 'https://placehold.co/400x500/FB7185/ffffff?text=Ball+Gown',
+                    description: 'Stunning ball gown designed for little princesses to shine at parties. Features multi-layered tulle.',
+                },
+                {
+                    id: 'dress3',
+                    name: 'Casual Denim Dress',
+                    price: '₹999',
+                    imageUrl: 'https://placehold.co/400x500/60A5FA/ffffff?text=Denim+Dress',
+                    description: 'Comfortable and stylish denim dress for everyday wear. Easy to style for any casual look.',
+                },
+                {
+                    id: 'dress4',
+                    name: 'Sparkle Party Dress',
+                    price: '₹1,899',
+                    imageUrl: 'https://placehold.co/400x500/FACC15/ffffff?text=Party+Dress',
+                    description: 'Shimmering party dress with sequin details, perfect for celebrations. Lightweight and comfortable.',
+                },
+                {
+                    id: 'dress5',
+                    name: 'Summer Maxi Dress',
+                    price: '₹1,599',
+                    imageUrl: 'https://placehold.co/400x500/81C784/ffffff?text=Maxi+Dress',
+                    description: 'Flowy maxi dress, ideal for beach days or relaxed evenings. Soft and elegant design.',
+                },
+            ],
+            necklaces: [
+                {
+                    id: 'necklace1',
+                    name: 'Cute Heart Pendant',
+                    price: '₹499',
+                    imageUrl: 'https://placehold.co/400x400/FBBF24/ffffff?text=Heart+Necklace',
+                    description: 'A delicate necklace with a cute heart pendant, ideal for daily wear. Hypoallergenic material.',
+                },
+                {
+                    id: 'necklace2',
+                    name: 'Unicorn Charm Necklace',
+                    price: '₹599',
+                    imageUrl: 'https://placehold.co/400x400/8B5CF6/ffffff?text=Unicorn+Necklace',
+                    description: 'Magical unicorn charm necklace, a favorite for fantasy lovers. Sterling silver chain.',
+                },
+                {
+                    id: 'necklace3',
+                    name: 'Pearl String Necklace',
+                    price: '₹799',
+                    imageUrl: 'https://placehold.co/400x400/EC4899/ffffff?text=Pearl+Necklace',
+                    description: 'Elegant string of pearls, adding a touch of sophistication to any outfit. Classic and timeless.',
+                },
+                {
+                    id: 'necklace4',
+                    name: 'Star Dangle Necklace',
+                    price: '₹399',
+                    imageUrl: 'https://placehold.co/400x400/34D399/ffffff?text=Star+Necklace',
+                    description: 'Playful necklace with dangling star charms, perfect for a casual look. Lightweight and shimmering.',
+                },
+                {
+                    id: 'necklace5',
+                    name: 'Butterfly Choker',
+                    price: '₹650',
+                    imageUrl: 'https://placehold.co/400x400/81D4FA/ffffff?text=Butterfly+Choker',
+                    description: 'Trendy butterfly choker, perfect for adding a stylish touch. Adjustable length.',
+                },
+            ],
+            footwear: [
+                {
+                    id: 'shoes1',
+                    name: 'Pink Glitter Sneakers',
+                    price: '₹1,500',
+                    imageUrl: 'https://placehold.co/400x400/FFC0CB/ffffff?text=Glitter+Sneakers',
+                    description: 'Comfortable and stylish glitter sneakers for everyday sparkle. Non-slip sole.',
+                },
+                {
+                    id: 'shoes2',
+                    name: 'Ballet Flats with Bow',
+                    price: '₹950',
+                    imageUrl: 'https://placehold.co/400x400/FFDDC1/ffffff?text=Ballet+Flats',
+                    description: 'Classic ballet flats with a cute bow detail, perfect for any occasion. Soft inner lining.',
+                },
+                {
+                    id: 'shoes3',
+                    name: 'Summer Sandals',
+                    price: '₹700',
+                    imageUrl: 'https://placehold.co/400x400/A0DA8B/ffffff?text=Summer+Sandals',
+                    description: 'Lightweight and breathable sandals for warm weather. Easy to put on and take off.',
+                },
+            ],
+            accessories: [
+                {
+                    id: 'acc1',
+                    name: 'Sparkly Headband',
+                    price: '₹250',
+                    imageUrl: 'https://placehold.co/400x400/DDA0DD/ffffff?text=Headband',
+                    description: 'A dazzling headband with embedded rhinestones. Perfect for special occasions.',
+                },
+                {
+                    id: 'acc2',
+                    name: 'Mini Backpack',
+                    price: '₹1,200',
+                    imageUrl: 'https://placehold.co/400x400/ADD8E6/ffffff?text=Mini+Backpack',
+                    description: 'Stylish and compact mini backpack for essentials. Multiple compartments.',
+                },
+                {
+                    id: 'acc3',
+                    name: 'Rainbow Hair Clips (Set of 6)',
+                    price: '₹300',
+                    imageUrl: 'https://placehold.co/400x400/FF6347/ffffff?text=Hair+Clips',
+                    description: 'Vibrant rainbow hair clips to add color to any hairstyle. Strong grip.',
+                },
+            ],
+            beauty: [
+                {
+                    id: 'beauty1',
+                    name: 'Kids Safe Nail Polish (Set)',
+                    price: '₹800',
+                    imageUrl: 'https://placehold.co/400x400/FFB6C1/ffffff?text=Nail+Polish',
+                    description: 'Non-toxic, peel-off nail polish set for endless fun. Vibrant colors.',
+                },
+                {
+                    id: 'beauty2',
+                    name: 'Fruity Lip Balm (3-pack)',
+                    price: '₹400',
+                    imageUrl: 'https://placehold.co/400x400/F08080/ffffff?text=Lip+Balm',
+                    description: 'Deliciously scented lip balms to keep lips soft and hydrated. Natural ingredients.',
+                },
+            ],
+            toys: [
+                {
+                    id: 'toy1',
+                    name: 'Dollhouse Playset',
+                    price: '₹2,500',
+                    imageUrl: 'https://placehold.co/400x400/98FB98/ffffff?text=Dollhouse',
+                    description: 'Multi-story dollhouse with furniture and accessories for imaginative play. Durable construction.',
+                },
+                {
+                    id: 'toy2',
+                    name: 'Art & Craft Kit',
+                    price: '₹1,000',
+                    imageUrl: 'https://placehold.co/400x400/87CEFA/ffffff?text=Art+Kit',
+                    description: 'Creative art and craft kit with various materials. Encourages creativity.',
+                },
+                {
+                    id: 'toy3',
+                    name: 'Plush Unicorn Toy',
+                    price: '₹750',
+                    imageUrl: 'https://placehold.co/400x400/D8BFD8/ffffff?text=Unicorn+Plush',
+                    description: 'Soft and cuddly unicorn plush toy, perfect for snuggling. High-quality fabric.',
+                },
+            ],
+        };
+
+        const categories = [
+            { id: 'dresses', name: 'Dresses', title: 'Dazzling Dresses' },
+            { id: 'necklaces', name: 'Necklaces', title: 'Exquisite Necklaces' },
+            { id: 'footwear', name: 'Footwear', title: 'Stylish Footwear' },
+            { id: 'accessories', name: 'Accessories', title: 'Chic Accessories' },
+            { id: 'beauty', name: 'Beauty & Skincare', title: 'Sparkle & Glow' },
+            { id: 'toys', name: 'Toys & Games', title: 'Fun & Play' },
+        ];
+
+        let activeCategory = 'dresses'; // Default active category
+
+        // Function to create a product card HTML element
+        function createProductCard(product, index) {
+            const productCard = document.createElement('div');
+            const animationDelayClass = `animate-delay-${Math.min(index * 100, 800)}`;
+            productCard.className = `bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-102 transition-all duration-300 overflow-hidden flex flex-col animate-fade-in-scale ${animationDelayClass}`;
+
+            productCard.innerHTML = `
+                <div class="relative overflow-hidden aspect-square rounded-t-xl">
+                    <img
+                        src="${product.imageUrl}"
+                        alt="${product.name}"
+                        class="absolute inset-0 w-full h-full object-cover object-center"
+                        onerror="this.onerror=null; this.src='https://placehold.co/400x400/CCCCCC/666666?text=Image+Not+Found';"
+                    />
+                </div>
+                <div class="p-5 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 line-clamp-2">${product.name}</h3>
+                    <p class="text-gray-600 text-sm mb-3 line-clamp-3 flex-grow">${product.description}</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-extrabold text-indigo-600">${product.price}</span>
+                        <button class="bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:from-pink-600 hover:to-rose-600 transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            return productCard;
+        }
+
+        // Function to render products for the active category
+        function renderProducts() {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = ''; // Clear existing products
+
+            const currentProducts = products[activeCategory];
+            if (currentProducts && currentProducts.length > 0) {
+                currentProducts.forEach((product, index) => {
+                    productGrid.appendChild(createProductCard(product, index));
+                });
+            } else {
+                productGrid.innerHTML = `<p class="col-span-full text-center text-gray-600 text-lg">No products found in this category.</p>`;
+            }
+
+            // Update category title
+            const categoryTitleElement = document.getElementById('category-title');
+            const currentCategoryData = categories.find(cat => cat.id === activeCategory);
+            categoryTitleElement.textContent = currentCategoryData ? currentCategoryData.title : 'Our Products';
+        }
+
+        // Function to render category navigation buttons and attach event listeners
+        function renderCategoryNav() {
+            const categoryNav = document.getElementById('category-nav');
+            categoryNav.innerHTML = ''; // Clear existing buttons
+
+            categories.forEach(category => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = category.name;
+                button.className = `text-base md:text-lg font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors duration-300 hover:scale-105 active:scale-95`;
+
+                if (category.id === activeCategory) {
+                    button.classList.add('bg-purple-600', 'text-white', 'shadow-lg');
+                } else {
+                    button.classList.add('text-gray-700', 'hover:text-purple-600', 'hover:bg-purple-100');
+                }
+
+                button.addEventListener('click', () => {
+                    activeCategory = category.id;
+                    renderCategoryNav(); // Re-render nav to update active state
+                    renderProducts(); // Re-render products for new category
+                });
+                li.appendChild(button);
+                categoryNav.appendChild(li);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategoryNav(); // Render navigation first
+            renderProducts(); // Render initial products
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
+
