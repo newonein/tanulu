@@ -239,13 +239,22 @@
                     imageUrl: 'new5.webp',
                     description: 'Flowy maxi dress, ideal for beach days or relaxed evenings. Soft and elegant design.',
                 },
+                // New Libas dress product
+                {
+                    id: 'libas-dress',
+                    name: 'Libas Women Ethnic Dress - Maroon Ankle Length',
+                    price: '₹999', // Price found from the Flipkart link
+                    imageUrl: 'new7.webp', // Placeholder for the actual image
+                    description: 'An elegant maroon ankle-length ethnic dress from Libas, perfect for traditional and casual occasions. As seen on Flipkart.',
+                    buyLink: 'https://www.flipkart.com/libas-women-ethnic-dress-maroon-ankle-length/p/itmd783bcfb875f8?pid=KTAFVHY8PCDAWNKE&lid=LSTKTAFVHY8PCDAWNKECLJJTA&marketplace=FLIPKART&q=best+dress+&store=clo%2Fodx%2Fmaj&srno=s_1_22&otracker=search&otracker1=search&fm=Search&iid=ce633012-025f-4319-9710-271b8d677605.KTAFVHY8PCDAWNKE.SEARCH&ppt=sp&ppn=sp&ssid=mmg99jglg00000001751047892034&qH=88e15d466c0edac8'
+                }
             ],
             necklaces: [
                 {
                     id: 'necklace1',
                     name: 'Cute Heart Pendant',
                     price: '₹499',
-                    imageUrl: 'new7.webp',
+                    imageUrl: 'https://placehold.co/400x400/FBBF24/ffffff?text=Heart+Necklace',
                     description: 'A delicate necklace with a cute heart pendant, ideal for daily wear. Hypoallergenic material.',
                 },
                 {
@@ -381,6 +390,11 @@
             const animationDelayClass = `animate-delay-${Math.min(index * 100, 800)}`;
             productCard.className = `bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-102 transition-all duration-300 overflow-hidden flex flex-col animate-fade-in-scale ${animationDelayClass}`;
 
+            // Determine button action based on product.buyLink
+            const buttonOnClickAction = product.buyLink
+                ? `window.open('${product.buyLink}', '_blank');` // Open link in new tab if buyLink exists
+                : `console.log('Add to cart clicked for: ${product.name}');`; // Log to console for other products
+
             productCard.innerHTML = `
                 <div class="relative overflow-hidden aspect-square rounded-t-xl">
                     <img
@@ -395,7 +409,7 @@
                     <p class="text-gray-600 text-sm mb-3 line-clamp-3 flex-grow">${product.description}</p>
                     <div class="flex justify-between items-center mt-auto">
                         <span class="text-2xl font-extrabold text-indigo-600">${product.price}</span>
-                        <button class="bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:from-pink-600 hover:to-rose-600 transition duration-300">
+                        <button onclick="${buttonOnClickAction}" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:from-pink-600 hover:to-rose-600 transition duration-300">
                             Add to Cart
                         </button>
                     </div>
