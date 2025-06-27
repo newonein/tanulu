@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestie's Boutique & Delights</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7ede2; /* Soft peach background */
+            color: #4a4a4a;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .buy-button {
+            transition: background-color 0.3s ease-in-out, transform 0.1s ease-in-out;
+        }
+        .buy-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-pink-300 to-purple-400 p-6 shadow-lg rounded-b-3xl">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-white text-4xl font-bold tracking-tight mb-4 md:mb-0">
+                <span class="block text-center md:inline">For My Dearest Bestie</span>
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#jewelry" class="text-white hover:text-pink-100 font-medium text-lg transition duration-300">Jewelry</a></li>
+                    <li><a href="#dresses" class="text-white hover:text-pink-100 font-medium text-lg transition duration-300">Dresses</a></li>
+                    <li><a href="#beauty" class="text-white hover:text-pink-100 font-medium text-lg transition duration-300">Beauty</a></li>
+                    <li><a href="#others" class="text-white hover:text-pink-100 font-medium text-lg transition duration-300">Others</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-pink-100 text-center py-20 overflow-hidden rounded-xl m-6 shadow-inner">
+        <div class="absolute inset-0 bg-pattern opacity-10" style="background-image: url('https://placehold.co/100x100/FFF0F5/E8D1D1?text=%E2%99%A5'); background-size: 20px;"></div>
+        <div class="container mx-auto relative z-10">
+            <h2 class="text-5xl font-extrabold text-pink-700 mb-6 leading-tight">
+                Welcome to Her World of Beauty & Grace!
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                A specially curated collection of delightful things, just for the most wonderful person.
+            </p>
+            <!-- Updated button to include data-url -->
+            <button onclick="handleBuyClick(this)" data-url="https://example.com/explore" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 buy-button">
+                Explore The Collection ✨
+            </button>
+        </div>
+    </section>
+
+    <!-- Jewelry Section -->
+    <section id="jewelry" class="py-16 bg-white rounded-xl m-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-pink-600 mb-12">Dazzling Jewelry 💎</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Jewelry Item 1 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F4B5C8/FFFFFF?text=Elegant+Necklace" alt="Elegant Necklace" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Graceful Pearl Necklace</h3>
+                    <p class="text-gray-600 mb-4">A timeless piece for sophisticated elegance. Perfect for any occasion.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$129.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/pearl-necklace" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Jewelry Item 2 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F4B5C8/FFFFFF?text=Sparkling+Earrings" alt="Sparkling Earrings" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Sparkling Diamond Studs</h3>
+                    <p class="text-gray-600 mb-4">Add a touch of brilliance to her everyday look. Pure radiance.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$99.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/diamond-studs" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Jewelry Item 3 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F4B5C8/FFFFFF?text=Chic+Bracelet" alt="Chic Bracelet" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Chic Charm Bracelet</h3>
+                    <p class="text-gray-600 mb-4">Personalize her style with a beautiful, intricate charm bracelet.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$79.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/charm-bracelet" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dresses Section -->
+    <section id="dresses" class="py-16 bg-pink-100 rounded-xl m-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-purple-600 mb-12">Elegant Dresses 👗</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Dress Item 1 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/B2EBF2/FFFFFF?text=Summer+Dress" alt="Summer Dress" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">Flowy Summer Maxi</h3>
+                    <p class="text-gray-600 mb-4">Light and airy, perfect for sunny days and graceful strolls.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$89.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/summer-maxi" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Dress Item 2 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/B2EBF2/FFFFFF?text=Cocktail+Dress" alt="Cocktail Dress" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">Chic Cocktail Dress</h3>
+                    <p class="text-gray-600 mb-4">Stunning design for an evening out, making heads turn.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$149.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/cocktail-dress" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Dress Item 3 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/B2EBF2/FFFFFF?text=Casual+Dress" alt="Casual Dress" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">Comfy Casual Day Dress</h3>
+                    <p class="text-gray-600 mb-4">Effortless style for her relaxed and comfortable moments.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$69.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/casual-dress" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beauty Products Section -->
+    <section id="beauty" class="py-16 bg-white rounded-xl m-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-pink-600 mb-12">Radiant Beauty Products 💄</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Beauty Item 1 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F5E0E8/FFFFFF?text=Face+Serum" alt="Face Serum" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Hydrating Glow Serum</h3>
+                    <p class="text-gray-600 mb-4">Achieve luminous skin with this enriching and revitalizing serum.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$45.00</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/hydrating-serum" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Beauty Item 2 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F5E0E8/FFFFFF?text=Lipstick" alt="Lipstick" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Velvet Matte Lipstick</h3>
+                    <p class="text-gray-600 mb-4">Rich, long-lasting color for a perfect pout. Available in many shades.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$22.50</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/matte-lipstick" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Beauty Item 3 -->
+                <div class="product-card bg-pink-50 p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/F5E0E8/FFFFFF?text=Eye+Shadow" alt="Eye Shadow Palette" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-purple-700 mb-3">Dreamy Eyeshadow Palette</h3>
+                    <p class="text-gray-600 mb-4">Create endless stunning looks with these vibrant and blendable shades.</p>
+                    <span class="text-3xl font-bold text-pink-800 mb-6">$35.00</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/eyeshadow-palette" class="buy-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Delights Section -->
+    <section id="others" class="py-16 bg-pink-100 rounded-xl m-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-purple-600 mb-12">Other Lovely Delights 🎁</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Other Item 1 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/C8F0F4/FFFFFF?text=Cozy+Scarf" alt="Cozy Scarf" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">Luxurious Silk Scarf</h3>
+                    <p class="text-gray-600 mb-4">Soft and elegant, adding a touch of luxury to any outfit.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$39.99</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/silk-scarf" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Other Item 2 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/C8F0F4/FFFFFF?text=Cute+Mug" alt="Cute Mug" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">"Bestie" Ceramic Mug</h3>
+                    <p class="text-gray-600 mb-4">Start her day with a warm drink and a reminder of your bond.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$18.00</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/bestie-mug" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+                <!-- Other Item 3 -->
+                <div class="product-card bg-white p-6 rounded-2xl shadow-md flex flex-col items-center text-center">
+                    <img src="https://placehold.co/300x200/C8F0F4/FFFFFF?text=Planner" alt="Planner" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-2xl font-semibold text-pink-700 mb-3">Stylish Daily Planner</h3>
+                    <p class="text-gray-600 mb-4">Help her organize her dreams and tasks with a beautiful planner.</p>
+                    <span class="text-3xl font-bold text-purple-800 mb-6">$25.00</span>
+                    <!-- Updated button to include data-url -->
+                    <button onclick="handleBuyClick(this)" data-url="https://example.com/daily-planner" class="buy-button bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full shadow-md">
+                        Buy Now! ❤️
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gradient-to-r from-purple-400 to-pink-300 p-6 text-center text-white rounded-t-3xl mt-6">
+        <p class="text-lg">&copy; 2025 Created with Love for My Bestie. All rights reserved.</p>
+        <p class="text-sm mt-2">Designed with care and affection by your amazing friend.</p>
+    </footer>
+
+    <script>
+        // Function to handle the click event for buy buttons
+        function handleBuyClick(button) {
+            // Play the sound
+            playBuySound();
+
+            // Get the URL from the data-url attribute
+            const url = button.dataset.url;
+
+            // If a URL is defined, open it in a new tab
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                console.warn('No URL specified for this button.');
+            }
+        }
+
+        // Function to play a sound when the buy button is clicked
+        function playBuySound() {
+            // Using a short, subtle bell sound for a pleasant user experience
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Create an oscillator node (for generating tones)
+            const oscillator = audioContext.createOscillator();
+            // Create a gain node (for controlling volume)
+            const gainNode = audioContext.createGain();
+
+            // Connect oscillator to gain node, and gain node to audio context destination
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Set oscillator type (e.g., 'sine', 'square', 'sawtooth', 'triangle')
+            oscillator.type = 'sine';
+            // Set initial frequency (e.g., a pleasant chime)
+            oscillator.frequency.setValueAtTime(880, audioContext.currentTime); // A5 note
+
+            // Make the sound decay over time for a bell-like effect
+            gainNode.gain.setValueAtTime(0.5, audioContext.currentTime); // Start volume
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5); // Decay over 0.5 seconds
+
+            // Start the oscillator
+            oscillator.start(audioContext.currentTime);
+            // Stop the oscillator after a short duration
+            oscillator.stop(audioContext.currentTime + 0.5); // Stop after 0.5 seconds
+        }
+    </script>
+</body>
+</html>
